@@ -1,0 +1,19 @@
+{
+    "manifest_version": 2,
+    "name": "MarkItDown",
+    "version": "0.0.0.1",
+    "description": "Type as you do in text editor, but generate markup. And vice-versa",
+    /*"background": {
+        "persistent": false,
+        "scripts": ["bg.js"]
+    },*/
+    "browser_action": {
+        "default_icon": "icon.png",
+        "default_popup": "popup.html",
+        "default_title": "Start MarkItDown!"
+    },
+    "permissions": [
+        "activeTab",
+        "https://ajax.googleapis.com/"
+    ]
+}
