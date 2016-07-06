@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "jquery": "^3.0.0",
+    "tinymce": "^4.4.0"
+  }
+}

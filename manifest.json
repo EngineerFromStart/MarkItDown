@@ -5,11 +5,11 @@
     "description": "Type as you do in text editor, but generate markup. And vice-versa",
     /*"background": {
         "persistent": false,
-        "scripts": ["bg.js"]
+        "scripts": ["popup.js"]
     },*/
     "browser_action": {
         "default_icon": "icon.png",
-        "default_popup": "popup.html",
+        "default_popup": "main.html",
         "default_title": "Start MarkItDown!"
     },
     "permissions": [
