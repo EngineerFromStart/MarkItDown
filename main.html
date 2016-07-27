@@ -21,6 +21,13 @@
             overflow: hidden;
             max-width: 400px;
         }
+        #tiny_container{
+            display: inline-block;
+        }
+        #mdtextarea{
+            width: 49%;
+            height: 500px;
+        }
     </style>
 
     <!--
@@ -41,9 +48,13 @@
         var bitbucket = {
             plugins: 'tables'
         }
+
+        var md_textarea;
+
         tinymce.init({
             selector: '#mytextarea',
             plugins: [basic.plugins],
+            height: 500,
             toolbar: 'cut copy paste undo redo | styleselect | bold italic | bullist numlist | blockquote | link image',
             style_formats: [
                 {title: "Paragraph", block: 'p'},
@@ -59,10 +70,14 @@
                 edit: {title: "Edit", items: "cut"}
             },
             setup: function(editor){
-                editor.on('change', function(e){
+                editor.on('change keyup', function(e){
                     console.log('event is: '+ e);
                     console.log('editor is: '+ editor);
                     console.log(toMarkdown(editor.getContent()));
+                    if (!md_textarea) {
+                        md_textarea = document.getElementById("mdtextarea");
+                    }
+                    md_textarea.value = toMarkdown(editor.getContent());
                 })
             }
         });
@@ -70,12 +85,17 @@
 </head>
 
 <body>
+    <div>
     <select name="provider">
         <option value="basic">Basic</option>
         <option value="github">Github</option>
         <option value="bitbucket">Bitbucker</option>
     </select>
-    <textarea id="mytextarea">Hello, World!</textarea>
+</div>
+    <span id="tiny_container">
+        <textarea id="mytextarea">Hello, World!</textarea>
+    </span>
+    <textarea id="mdtextarea">Hello, World!</textarea>
 </body>
 
 </html>
