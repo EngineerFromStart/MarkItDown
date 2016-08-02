@@ -12,6 +12,8 @@
         body {
             font-family: "Segoe UI", "Lucida Grande", Tahoma, sans-serif;
             font-size: 100%;
+            margin: 0;
+            padding: 0;
         }
 
         #status {
@@ -21,12 +23,12 @@
             overflow: hidden;
             max-width: 400px;
         }
-        #tiny_container{
+
+        #tiny_container {
             display: inline-block;
         }
-        #mdtextarea{
-            width: 49%;
-            height: 500px;
+        .mce_container{
+            width: 50%;
         }
     </style>
 
@@ -36,66 +38,29 @@
       -
       - [1]: https://developer.chrome.com/extensions/contentSecurityPolicy
      -->
-    <script src='node_modules/tinymce/tinymce.min.js'></script>
-    <script src='node_modules/to-markdown/dist/to-markdown.js'></script>
-    <script>
-        var basic = {
-            plugins: 'link image textpattern preview save paste'
-        }
-        var github = {
-            plugins: 'tables strikethrough'
-        }
-        var bitbucket = {
-            plugins: 'tables'
-        }
 
-        var md_textarea;
-
-        tinymce.init({
-            selector: '#mytextarea',
-            plugins: [basic.plugins],
-            height: 500,
-            toolbar: 'cut copy paste undo redo | styleselect | bold italic | bullist numlist | blockquote | link image',
-            style_formats: [
-                {title: "Paragraph", block: 'p'},
-                {title: "Heading 1", block: 'h1'},
-                {title: "Heading 2", block: 'h2'},
-                {title: "Heading 3", block: 'h3'},
-                {title: "Heading 4", block: 'h4'},
-                {title: "Heading 5", block: 'h5'},
-                {title: "Heading 6", block: 'h6'},
-            ],
-            menu: {
-                file: {title: "File", items: "save, preview"},
-                edit: {title: "Edit", items: "cut"}
-            },
-            setup: function(editor){
-                editor.on('change keyup', function(e){
-                    console.log('event is: '+ e);
-                    console.log('editor is: '+ editor);
-                    console.log(toMarkdown(editor.getContent()));
-                    if (!md_textarea) {
-                        md_textarea = document.getElementById("mdtextarea");
-                    }
-                    md_textarea.value = toMarkdown(editor.getContent());
-                })
-            }
-        });
-    </script>
 </head>
 
 <body>
     <div>
-    <select name="provider">
-        <option value="basic">Basic</option>
-        <option value="github">Github</option>
-        <option value="bitbucket">Bitbucker</option>
-    </select>
-</div>
-    <span id="tiny_container">
-        <textarea id="mytextarea">Hello, World!</textarea>
-    </span>
+        <select name="provider">
+            <option value="basic">Basic</option>
+            <option value="github">Github</option>
+            <option value="bitbucket">Bitbucker</option>
+        </select>
+    </div>
+    <span class="mce_container">
+    <textarea id="mytextarea">Hello, World!</textarea>
+</span>
+    <span class="mce_container">
     <textarea id="mdtextarea">Hello, World!</textarea>
+</span>
+
+<script src='node_modules/tinymce/tinymce.min.js'></script>
+<script src='node_modules/to-markdown/dist/to-markdown.js'></script>
+<script src='node_modules/showdown/dist/showdown.min.js'></script>
+<script src='src/init.js'></script>
+
 </body>
 
 </html>
